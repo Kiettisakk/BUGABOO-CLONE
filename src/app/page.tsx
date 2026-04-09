@@ -5,7 +5,7 @@ import ContentGrid from "@/components/ui/ContentGrid";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0B0D17] text-white overflow-hidden pb-16">
+    <main className="min-h-screen bg-[#0B0D17] text-white overflow-hidden pb-16 pt-[110px] md:pt-[120px]">
       <HeroBanner />
       
       <div className="max-w-[1440px] mx-auto pt-8 md:pt-12 space-y-12 md:space-y-16 lg:px-8 xl:px-12">

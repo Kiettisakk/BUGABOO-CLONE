@@ -1,17 +1,21 @@
+"use client";
+
+import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useCallback } from "react";
 
 const popularTags = [
-  "เด็ต รบพล",
+  "เด่น รพพล",
   "นักแสดงช่อง 7HD",
   "เข้ม หัสวีร์",
   "ดูละคร",
   "ของทุกเดือน",
   "7 สีคอนเสิร์ต เฟสติวัล",
   "หยก ธัญยกันต์",
-  "ดูละครย้อนหลังช่อง7",
+  "ดูละครย้อนหลังช่อง 7",
   "มิ้นท์ บารมิตา",
-  "เรื่องย่อละคร ช่อง7",
+  "เรื่องย่อละคร ช่อง 7",
 ];
 
 const dramaCards = [
@@ -53,19 +57,29 @@ const dramaCards = [
 ];
 
 export default function DramaShowcaseSection() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: "start",
+    containScroll: "trimSnaps",
+    dragFree: true,
+  });
+
+  const scrollNext = useCallback(() => {
+    emblaApi?.scrollNext();
+  }, [emblaApi]);
+
   return (
     <section className="relative left-1/2 right-1/2 w-screen -translate-x-1/2 bg-white">
-      <div className="mx-auto max-w-[1560px] px-5 pb-12 pt-10 md:px-8 md:pb-14 md:pt-12 xl:px-14">
-        <h2 className="text-[28px] font-semibold tracking-[-0.03em] text-[#0f172a] md:text-[44px]">
+      <div className="mx-auto max-w-[1560px] px-5 pb-[42px] pt-[42px] md:px-8 xl:px-14">
+        <h2 className="text-[28px] font-semibold tracking-[-0.03em] text-[#0f172a] md:text-[42px]">
           แท็กยอดนิยม
         </h2>
 
-        <div className="mt-8 flex max-w-[980px] flex-wrap gap-4">
+        <div className="mt-[26px] flex max-w-[980px] flex-wrap gap-x-3 gap-y-[14px]">
           {popularTags.map((tag) => (
             <Link
               key={tag}
               href="#"
-              className="rounded-[6px] border border-[#b7aaff] bg-[#f7f5ff] px-4 py-2 text-[15px] font-normal leading-6 text-[#6d4aff] transition hover:bg-[#f0edff]"
+              className="rounded-[6px] border border-[#b8adff] bg-[#f7f5ff] px-[14px] py-[7px] text-[14px] font-normal leading-5 text-[#6d4aff] transition hover:bg-[#f0edff]"
             >
               {tag}
             </Link>
@@ -73,98 +87,101 @@ export default function DramaShowcaseSection() {
         </div>
       </div>
 
-      <div className="relative overflow-hidden bg-[#1b0c28]">
+      <div className="relative overflow-hidden bg-[#1d0f29]">
         <div
           aria-hidden
-          className="absolute inset-0 opacity-45"
+          className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(circle at 18% 35%, rgba(151, 80, 255, 0.28), transparent 24%), radial-gradient(circle at 80% 50%, rgba(133, 56, 255, 0.2), transparent 28%), linear-gradient(90deg, rgba(28,13,44,0.94) 0%, rgba(40,17,56,0.88) 38%, rgba(28,10,42,0.92) 100%)",
+              "radial-gradient(circle at 52% 42%, rgba(255,255,255,0.09), transparent 24%), linear-gradient(90deg, rgba(30,11,43,0.94) 0%, rgba(47,17,61,0.88) 42%, rgba(29,10,41,0.96) 100%)",
           }}
         />
         <div
           aria-hidden
-          className="absolute inset-0 scale-110 blur-sm"
+          className="absolute inset-0 opacity-[0.18] blur-[2px]"
           style={{
-            backgroundImage:
-              "url('https://picsum.photos/seed/drama-background/1600/760')",
+            backgroundImage: "url('https://picsum.photos/seed/drama-background/1600/760')",
             backgroundPosition: "center",
             backgroundSize: "cover",
-            opacity: 0.14,
           }}
         />
 
-        <div className="relative mx-auto max-w-[1560px] px-5 py-12 md:px-8 md:py-14 xl:px-14">
+        <div className="relative mx-auto max-w-[1560px] px-5 pb-[34px] pt-[70px] md:px-8 xl:px-14">
           <div className="flex items-center gap-4">
-            <h2 className="text-[28px] font-semibold tracking-[-0.03em] text-white md:text-[44px]">
+            <h2 className="text-[34px] font-semibold tracking-[-0.03em] text-white md:text-[54px]">
               ละครช่อง 7HD
             </h2>
             <Link
               href="#"
-              className="inline-flex items-center gap-2 text-lg font-medium text-[#9c87ff] transition hover:text-[#b8a7ff]"
+              className="mt-1 inline-flex items-center gap-2 text-[18px] font-medium text-[#8f7cff] transition hover:text-[#b2a5ff]"
             >
               ดูทั้งหมด
-              <span aria-hidden className="text-[24px] leading-none">
+              <span aria-hidden className="text-[28px] leading-none">
                 →
               </span>
             </Link>
           </div>
 
-          <div className="mt-10 flex items-start gap-9 overflow-x-auto pb-2 pr-6 hide-scrollbar">
-            {dramaCards.map((item) => (
-              <article key={item.id} className="w-[184px] shrink-0">
-                <Link href="#" className="group block">
-                  <div className="relative overflow-hidden rounded-[16px] bg-[#d3d0dc] shadow-[0_14px_32px_rgba(6,4,20,0.28)]">
-                    <div className="relative aspect-[184/292]">
+          <div className="relative mt-[42px]">
+            <div className="overflow-hidden" ref={emblaRef}>
+              <div className="flex gap-0">
+                {dramaCards.map((item) => (
+                  <article key={item.id} className="min-w-0 flex-[0_0_248px] pr-[36px]">
+                    <Link href="#" className="group block">
+                      <div className="relative overflow-hidden rounded-[18px] bg-[#d3d0dc] shadow-[0_12px_28px_rgba(6,4,20,0.3)]">
+                        <div className="relative aspect-[208/318]">
+                          <Image
+                            src={item.image}
+                            alt={item.title}
+                            fill
+                            className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                            sizes="208px"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="pt-[14px]">
+                        <span className="inline-flex rounded-[7px] border border-[#7235ff] bg-[#2a1240] px-4 py-[5px] text-[14px] leading-5 text-[#e2d8ff]">
+                          {item.chip}
+                        </span>
+                        <h3 className="mt-4 text-[17px] font-medium leading-8 text-white">
+                          {item.title}
+                        </h3>
+                        <p className="min-h-[28px] text-[16px] leading-7 text-[#cbc1d8]">
+                          {item.meta}
+                        </p>
+                      </div>
+                    </Link>
+                  </article>
+                ))}
+
+                <div className="flex-[0_0_390px] pl-[34px]">
+                  <Link href="#" className="group block">
+                    <div className="relative h-[282px] w-[364px] overflow-hidden rounded-[2px] bg-[#dad6e0] shadow-[0_14px_32px_rgba(6,4,20,0.25)]">
                       <Image
-                        src={item.image}
-                        alt={item.title}
+                        src="https://picsum.photos/seed/drama-advert/728/564"
+                        alt="แบนเนอร์โฆษณา"
                         fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                        sizes="184px"
+                        className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                        sizes="364px"
                       />
                     </div>
-                  </div>
-
-                  <div className="pt-4">
-                    <span className="inline-flex rounded-[6px] border border-[#6f35ff] bg-[#2a1144] px-4 py-1 text-[14px] leading-6 text-[#d6c8ff]">
-                      {item.chip}
-                    </span>
-                    <h3 className="mt-4 text-[18px] font-medium leading-8 text-white">
-                      {item.title}
-                    </h3>
-                    <p className="min-h-[28px] text-[16px] leading-7 text-[#c2bacd]">
-                      {item.meta}
-                    </p>
-                  </div>
-                </Link>
-              </article>
-            ))}
-
-            <div className="flex shrink-0 items-start pl-8">
-              <Link href="#" className="group mt-0 block">
-                <div className="relative h-[282px] w-[340px] overflow-hidden rounded-[2px] bg-[#dad6e0] shadow-[0_14px_32px_rgba(6,4,20,0.25)]">
-                  <Image
-                    src="https://picsum.photos/seed/drama-advert/680/564"
-                    alt="โฆษณา"
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                    sizes="340px"
-                  />
+                  </Link>
                 </div>
-              </Link>
+              </div>
             </div>
-          </div>
 
-          <button
-            type="button"
-            aria-label="เลื่อนไปขวา"
-            className="absolute right-[27.5rem] top-[19.25rem] hidden h-[54px] w-[54px] items-center justify-center rounded-full bg-white text-[#697386] shadow-[0_12px_30px_rgba(9,6,24,0.35)] xl:flex"
-          >
-            <span aria-hidden className="text-[30px] leading-none">
-              →
-            </span>
-          </button>
+            <button
+              type="button"
+              aria-label="เลื่อนไปขวา"
+              onClick={scrollNext}
+              className="absolute right-[26.25rem] top-[161px] hidden h-[60px] w-[60px] items-center justify-center rounded-full bg-white text-[#6a7384] shadow-[0_12px_32px_rgba(9,6,24,0.36)] transition hover:text-[#111827] xl:flex"
+            >
+              <span aria-hidden className="text-[30px] leading-none">
+                →
+              </span>
+            </button>
+          </div>
         </div>
       </div>
     </section>

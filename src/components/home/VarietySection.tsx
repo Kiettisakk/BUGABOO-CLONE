@@ -3,22 +3,20 @@
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Crown } from "lucide-react";
 import { useCallback } from "react";
 
-interface ContentItem {
-  id: number;
-  title: string;
-  thumbnail: string;
-  premium?: boolean;
-}
+const varietyItems = [
+  { id: 1, title: "มีเรื่องต้องคุย", image: "https://picsum.photos/seed/variety-1/420/640" },
+  { id: 2, title: "AGIBOT Night 2026", image: "https://picsum.photos/seed/variety-2/420/640" },
+  { id: 3, title: "ฮับคุย ฮับลึก", image: "https://picsum.photos/seed/variety-3/420/640" },
+  { id: 4, title: "ฮับคุย เสาร์-อาทิตย์", image: "https://picsum.photos/seed/variety-4/420/640" },
+  { id: 5, title: "Picpost Review", image: "https://picsum.photos/seed/variety-5/420/640" },
+  { id: 6, title: "หนทางพารวย", image: "https://picsum.photos/seed/variety-6/420/640" },
+  { id: 7, title: "ทำดีได้ดี", image: "https://picsum.photos/seed/variety-7/420/640" },
+  { id: 8, title: "ศึกชิงผู้นำ อนาคตประเทศไทย", image: "https://picsum.photos/seed/variety-8/420/640" },
+];
 
-interface ContentGridProps {
-  title: string;
-  items: ContentItem[];
-}
-
-export default function ContentGrid({ title, items }: ContentGridProps) {
+export default function VarietySection() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     containScroll: "trimSnaps",
@@ -30,11 +28,11 @@ export default function ContentGrid({ title, items }: ContentGridProps) {
   }, [emblaApi]);
 
   return (
-    <section className="relative left-1/2 right-1/2 w-screen -translate-x-1/2 bg-white py-[34px]">
+    <section className="relative left-1/2 right-1/2 w-screen -translate-x-1/2 bg-white py-[28px]">
       <div className="mx-auto max-w-[1560px] px-5 md:px-8 xl:px-14">
         <div className="flex items-center gap-4">
-          <h2 className="text-[28px] font-semibold tracking-[-0.03em] text-[#0f172a] md:text-[42px]">
-            {title}
+          <h2 className="text-[24px] font-semibold tracking-[-0.03em] text-[#0f172a] md:text-[42px]">
+            รายการวาไรตี้
           </h2>
           <Link
             href="#"
@@ -47,21 +45,16 @@ export default function ContentGrid({ title, items }: ContentGridProps) {
           </Link>
         </div>
 
-        <div className="relative mt-[26px]">
+        <div className="relative mt-[28px]">
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex">
-              {items.map((item) => (
+              {varietyItems.map((item) => (
                 <article key={item.id} className="min-w-0 flex-[0_0_208px] pr-[30px]">
                   <Link href="#" className="group block">
                     <div className="relative overflow-hidden rounded-[14px] bg-[#ddd] shadow-[0_10px_28px_rgba(15,23,42,0.08)]">
-                      {item.premium ? (
-                        <div className="absolute right-[10px] top-[10px] z-10 flex h-8 w-8 items-center justify-center rounded-[8px] bg-[#7b5cff] text-white shadow-[0_10px_16px_rgba(123,92,255,0.28)]">
-                          <Crown className="h-4 w-4 fill-current" strokeWidth={1.75} />
-                        </div>
-                      ) : null}
                       <div className="relative aspect-[208/318]">
                         <Image
-                          src={item.thumbnail}
+                          src={item.image}
                           alt={item.title}
                           fill
                           loading="lazy"
@@ -81,11 +74,11 @@ export default function ContentGrid({ title, items }: ContentGridProps) {
 
           <button
             type="button"
-            aria-label={`เลื่อนไปขวาสำหรับ ${title}`}
+            aria-label="เลื่อนไปขวาสำหรับรายการวาไรตี้"
             onClick={scrollNext}
-            className="absolute right-[-2px] top-[126px] hidden h-[56px] w-[56px] items-center justify-center rounded-full border border-[#d5dceb] bg-white text-[#697386] shadow-[0_12px_32px_rgba(15,23,42,0.14)] transition hover:text-[#111827] xl:flex"
+            className="absolute right-[-2px] top-[118px] hidden h-[56px] w-[56px] items-center justify-center rounded-full border border-[#d5dceb] bg-white text-[#697386] shadow-[0_12px_32px_rgba(15,23,42,0.14)] transition hover:text-[#111827] xl:flex"
           >
-            <span aria-hidden className="text-[30px] leading-none">
+            <span aria-hidden className="text-[28px] leading-none">
               →
             </span>
           </button>
